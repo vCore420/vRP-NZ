@@ -1,0 +1,44 @@
+:root {
+    --primary: #663399;
+    --background: #18122b;
+    --text: #f1f5f9;
+    --accent: #a084ca;
+    --font-main: 'Montserrat', Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--font-main);
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    border: 8px solid #232946;
+    border-top: 8px solid var(--primary);
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    animation: spin 1.2s linear infinite;
+    margin: 2em 0;
+}
+
+#loading-overlay {
+    background: var(--background);
+    min-height: 100vh;
+    min-width: 100vw;
+    transition: opacity 0.35s ease;
+    opacity: 1;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}

@@ -1,0 +1,352 @@
+:root {
+    --primary: #663399;         /* Main accent */
+    --secondary: #22223b;       /* Deep dark blue for backgrounds */
+    --accent: #a084ca;          /* Gold accent */
+    --background: #18122b;      /* Very dark purple/blue background */
+    --surface: #232946;         /* Slightly lighter surface for cards */
+    --text: #f1f5f9;            /* Light text */
+    --danger: #ef4444;          /* Red for errors */
+    --success: #22c55e;         /* Green for success */
+    --warning: #f59e42;         /* Orange for warnings */
+    --border-radius: 8px;
+    --transition: 0.2s all;
+    --font-main: 'Montserrat', Arial, sans-serif;
+}
+
+#char-select-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    background: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30vw;
+}
+
+/* Left: Character menu */
+.char-menu {
+    flex: 0 0 360px; 
+    max-width: 360px;
+    min-height: 460px;
+    background: rgba(35, 41, 70, 0.6);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(102,51,153,0.18);
+    padding: 0.8em 0.8em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2em;
+}
+
+/* Character slots list */
+#char-slots {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    width: 100%;
+    max-height: calc(80% - 160px);
+    overflow-y: auto;
+}
+
+/* Each slot */
+.char-slot {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    background: var(--primary);
+    border-radius: 12px;
+    padding: 0.8em 0.8em;
+    height: 28px;
+    min-height: 28px;
+    color: var(--text);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.2s, background 0.2s;
+}
+.char-slot.selected {
+    border: 2px solid var(--primary);
+    background: var(--accent);
+}
+.char-slot .avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2em;
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(102,51,153,0.12);
+}
+.char-slot .info {
+    flex: 1;
+}
+.char-slot .stats {
+    font-size: 0.95em;
+    color: var(--text);
+}
+
+/* Actions */
+#char-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+#char-actions button {
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    padding: 0.7em 2em;
+    margin: 0 0.2em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    box-shadow: 0 2px 8px rgba(102,51,153,0.10);
+    outline: none;
+}
+
+/* Play button: bold purple gradient */
+#play-btn, #char-actions .primary {
+    background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+    color: var(--text);
+}
+#play-btn:hover, #char-actions .primary:hover {
+    background: linear-gradient(90deg, var(--accent) 60%, var(--primary) 100%);
+    color: var(--text);
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(102,51,153,0.18);
+}
+
+/* Delete button: red/danger */
+#delete-btn, #char-actions .danger {
+    background: linear-gradient(90deg, var(--danger) 60%, #ffb3b3 100%);
+    color: #fff;
+}
+#delete-btn:hover, #char-actions .danger:hover {
+    background: linear-gradient(90deg, #ffb3b3 60%, var(--danger) 100%);
+    color: var(--danger);
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(239,68,68,0.18);
+}
+
+/* Disabled state */
+#char-actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(0.3);
+}
+
+/* Right: Preview panel */
+.char-preview {
+    flex: 0 0 360px;
+    max-width: 360px;
+    min-height: 460px;
+    max-height: 460px;
+    background: rgba(35, 41, 70, 0.6);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(102,51,153,0.18);
+    padding: 2.5em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+/* Preview info */
+#char-preview-info {
+    width: 100%;
+    text-align: center;
+    color: var(--text);
+    font-size: 1.1em;
+    margin-bottom: 1em;
+}
+
+/* Preview viewport: transparent, for ped */
+#char-preview-viewport {
+    width: 260px;
+    height: 380px;
+    background: rgba(24,18,43,0.7);
+    border-radius: 16px;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 16px rgba(102,51,153,0.12);
+    /* 3D preview handled by FiveM camera */
+}
+
+/* Headings */
+.char-menu h1, .char-preview h2 {
+    color: var(--text);
+    font-family: var(--font-main);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.7em;
+}
+
+/* Fade animation classes */
+.fade-in {
+    animation: fadeIn 0.4s forwards;
+}
+.fade-out {
+    animation: fadeOut 0.4s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Character Creation Overlay */
+#char-create-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10001;
+    background: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+/* Character Creation Menu Card */
+.char-create-menu {
+    flex: 0 0 360px;
+    max-width: 360px;
+    min-height: 460px;
+    background: rgba(35, 41, 70, 0.39);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(102,51,153,0.18);
+    padding: 2.5em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2em;
+}
+
+.char-create-menu h1 {
+    color: var(--text);
+    font-family: var(--font-main);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.7em;
+}
+
+#char-create-form label {
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+    display: block;
+    letter-spacing: 0.02em;
+}
+
+#char-create-form input[type="text"] {
+    width: 100%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1.5px solid var(--primary);
+    border-radius: 8px;
+    padding: 0.7em;
+    font-size: 1em;
+    margin-bottom: 1em;
+    transition: var(--transition), box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(102,51,153,0.08);
+}
+
+#char-create-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(102,51,153,0.18);
+}
+
+.gender-btn {
+    flex: 1;
+    margin: 0.2em;
+    background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+    color: var(--text);
+    border: none;
+    border-radius: 10px;
+    padding: 0.7em 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    box-shadow: 0 2px 8px rgba(102,51,153,0.10);
+}
+
+.gender-btn.selected,
+.gender-btn:focus {
+    background: linear-gradient(90deg, var(--accent) 60%, var(--primary) 100%);
+    color: var(--text);
+    outline: 2px solid var(--primary);
+}
+
+#randomize-btn {
+    background: linear-gradient(90deg, var(--accent) 60%, #ede4ff 100%);
+    color: var(--text);
+    border-radius: 10px;
+    font-weight: 600;
+    margin-right: 0.5em;
+}
+#randomize-btn:hover {
+    background: linear-gradient(90deg, #ede4ff 60%, var(--accent) 100%);
+    color: var(--text);
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(160,132,202,0.18);
+}
+
+#create-char-btn {
+    background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+    color: var(--text);
+    border-radius: 10px;
+    font-weight: 600;
+    margin-right: 0.5em;
+}
+#create-char-btn:hover {
+    background: linear-gradient(90deg, var(--accent) 60%, var(--primary) 100%);
+    color: var(--text);
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(102,51,153,0.18);
+}
+
+#cancel-create-btn {
+    background: linear-gradient(90deg, var(--danger) 60%, #ffb3b3 100%);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+}
+#cancel-create-btn:hover {
+    background: linear-gradient(90deg, #ffb3b3 60%, var(--danger) 100%);
+    color: var(--danger);
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(239,68,68,0.18);
+}
+
+/* Hide overlays by default */
+#char-select-overlay,
+#char-create-overlay {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+}
+#char-select-overlay.active,
+#char-create-overlay.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}

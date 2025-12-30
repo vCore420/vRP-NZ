@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vRP NZ - Character Select</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="char-select-overlay" class="center">
+        <div class="char-menu card">
+            <h1>Select Your Character</h1>
+            <div id="char-slots" class="flex"></div>
+            <div id="char-actions" class="flex center">
+                <button id="play-btn" class="primary" disabled>Play</button>
+                <button id="delete-btn" class="danger" disabled>Delete</button>
+            </div>
+        </div>
+        <div class="char-preview card">
+            <h2>Preview</h2>
+            <div id="char-preview-info">
+                <!-- Character info and stats go here -->
+            </div>
+            <div id="char-preview-viewport">
+            </div>
+        </div>
+    </div>
+    <div id="char-create-overlay" class="center" style="display:none;">
+        <div class="char-create-menu card">
+            <h1>Create Your Character</h1>
+            <form id="char-create-form">
+                <label>First Name</label>
+                <input type="text" id="char-firstname" maxlength="16" required>
+                <label>Last Name</label>
+                <input type="text" id="char-lastname" maxlength="16" required>
+                <label>Gender</label>
+                <div class="flex">
+                    <button type="button" class="gender-btn" data-gender="male">Male</button>
+                    <button type="button" class="gender-btn" data-gender="female">Female</button>
+                </div>
+                <!-- Add appearance controls here (sliders, selects, etc.) -->
+                <div class="flex" style="margin-top:2em;">
+                    <button type="button" id="randomize-btn">Randomize</button>
+                    <button type="submit" id="create-char-btn" class="primary">Create</button>
+                    <button type="button" id="cancel-create-btn" class="danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

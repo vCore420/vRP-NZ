@@ -1,0 +1,98 @@
+/* Color palette */
+:root {
+    --primary: #663399;         /* Main accent */
+    --secondary: #22223b;       /* Deep dark blue for backgrounds */
+    --accent: #a084ca;          /* Gold accent */
+    --background: #18122b;      /* Very dark purple/blue background */
+    --surface: #232946;         /* Slightly lighter surface for cards */
+    --text: #f1f5f9;            /* Light text */
+    --danger: #ef4444;          /* Red for errors */
+    --success: #22c55e;         /* Green for success */
+    --warning: #f59e42;         /* Orange for warnings */
+    --border-radius: 8px;
+    --transition: 0.2s all;
+    --font-main: 'Montserrat', Arial, sans-serif;
+}
+
+/* Reset and base styles */
+body {
+    margin: 0;
+    padding: 0;
+    background: none;
+    color: var(--text);
+    font-family: var(--font-main);
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.5em 0;
+}
+
+button {
+    background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+    color: var(--text);
+    border: none;
+    border-radius: 12px;
+    padding: 0.7em 2em;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 8px rgba(102,51,153,0.15);
+    cursor: pointer;
+    transition: var(--transition), transform 0.1s;
+}
+button:hover {
+    background: linear-gradient(90deg, var(--accent) 60%, var(--primary) 100%);
+    color: var(--primary);
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(102,51,153,0.25);
+}
+
+input, select, textarea {
+    background: var(--surface);
+    color: var(--text);
+    border: 1.5px solid var(--primary);
+    border-radius: 8px;
+    padding: 0.7em;
+    font-size: 1em;
+    margin-bottom: 1em;
+    transition: var(--transition), box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(102,51,153,0.08);
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(102,51,153,0.18);
+}
+
+.card {
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid rgba(102,51,153,0.15);
+    box-shadow: 0 4px 24px rgba(24,18,43,0.18);
+    padding: 2em 2.5em;
+    margin: 2em 0;
+}
+
+.flex {
+    display: flex;
+    gap: 1em;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hide {
+    display: none !important;
+}
+
+.notification.info    { border-left: 6px solid var(--primary); }
+.notification.success { border-left: 6px solid var(--success); }
+.notification.danger  { border-left: 6px solid var(--danger); }
+.notification.warning { border-left: 6px solid var(--warning); }
